@@ -1,0 +1,49 @@
+package com.m3.training.rentals;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "City")
+public class City {
+
+	@Id
+	@Column(name = "city_ID")
+	private int cityID;
+	@Column(name = "city")
+	private String city;
+	@Column(name = "country_ID")
+	private int countryID;
+	@Column(name = "LAST_UPDATE")
+	private Date lastUpdate;
+	
+	
+	public int getCityID() {
+		return cityID;
+	}
+	public void setCityID(int cityID) {
+		this.cityID = cityID;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public int getCountryID() {
+		return countryID;
+	}
+	public void setCountryID(int countryID) {
+		this.countryID = countryID;
+	}
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+}
