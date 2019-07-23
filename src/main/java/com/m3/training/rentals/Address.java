@@ -35,6 +35,9 @@ public class Address {
 	@OneToMany(mappedBy = "address")
 	private List<Customer> customerList = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "address")
+	private List<Store> storeList = new ArrayList<>();
+	
 	public int getAddressID() {
 		return addressID;
 	}
