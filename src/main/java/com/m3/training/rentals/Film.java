@@ -1,14 +1,17 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FIRM")
+@Table(name = "FILM")
 public class Film {
 	@Id
 	@Column(name = "FILM_ID")
@@ -21,6 +24,8 @@ public class Film {
 	private int releaseYear;
 	@Column(name = "LANGUAGE_ID")
 	private int languageID;
+	
+	// FIXME: Change originalLanguageID to optional
 	@Column(name = "ORIGINAL_LANGUAGE_ID")
 	private int originalLanguageID;
 	@Column(name = "RENTAL_DURATION")
@@ -37,6 +42,9 @@ public class Film {
 	private String specialFeatures;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@ManyToMany(mappedBy = "filmList")
+	private Set<Actor> actorList = new HashSet<>();
 	
 	public int getFilmID() {
 		return filmID;
@@ -112,8 +120,16 @@ public class Film {
 	}
 	
 	public String toString() {
-		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " + getLanguageID()+" " +getOriginalLanguageID() +" " +getRentalDuration() +" " +
-				getRentalRate()+" " +
-				getLength()+" " +getReplacementCost() +" " + getRating()+" " + getSpecialFeatures()+" " + getLastUpdate();
+		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " + getLanguageID()+" " +
+			getOriginalLanguageID() +" " +getRentalDuration() +" " + getRentalRate()+" " + getLength()
+			+" " +getReplacementCost() +" " + getRating()+" " + getSpecialFeatures()+" " + getLastUpdate();
+	}
+	
+	public String getListOfActors() {
+		String retString = "";
+		for (Actor actor : actorList) {
+			retString += actor.getFirstName() + " " + actor.getLastName() + ". ";
+		}
+		return retString;
 	}
 }

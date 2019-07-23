@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,10 @@ public class Address {
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 	
+	@ManyToOne
+	@JoinColumn(name = "city_ID")
+	private City city;
+	
 	public int getAddressID() {
 		return addressID;
 	}
@@ -50,7 +56,7 @@ public class Address {
 	public String getDistrict() {
 		return district;
 	}
-	public void setDistric(String distric) {
+	public void setDistric(String district) {
 		this.district = district;
 	}
 	public int getCityID() {
@@ -76,5 +82,10 @@ public class Address {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	
+	public String toString() {
+		return getAddressID() + ": " + getAddress() + ", " + getCityID() + ": " + city.getCity()
+			+ ", " + getPostalCode() + ". Phone: " + getPhone() + ". " + getLastUpdate();
 	}
 }
