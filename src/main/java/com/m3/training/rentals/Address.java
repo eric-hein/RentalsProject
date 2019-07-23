@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -37,6 +39,10 @@ public class Address {
 	
 	@OneToMany(mappedBy = "address")
 	private List<Store> storeList = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "city_ID")
+	private City city;
 	
 	public int getAddressID() {
 		return addressID;
@@ -86,5 +92,9 @@ public class Address {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	
+	public String toString() {
+		return getAddressID() + ": " + getAddress() + ", " + getCityID() + ": " + city.getCity()
+			+ ", " + getPostalCode() + ". Phone: " + getPhone() + ". " + getLastUpdate();
+	}
 }
-

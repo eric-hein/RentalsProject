@@ -5,8 +5,6 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,12 +13,16 @@ public class Customer {
 	@Id
 	@Column(name = "CUSTOMER_ID")
 	private int customerID;
+	@Column(name = "STORE_ID")
+	private int storeID;
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	@Column(name = "EMAIL")
 	private String email;
+	@Column(name = "ADDRESS")
+	private int addressID;
 	@Column(name = "ACTIVE")
 	private int active;
 	@Column(name = "CREATE_DATE")
@@ -28,18 +30,17 @@ public class Customer {
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 	
-	@ManyToOne
-    @JoinColumn(name = "STORE_ID")
-	private Store store;
-	@ManyToOne
-    @JoinColumn(name = "ADDRESS_ID")
-	private Address address;
-	
 	public int getCustomerID() {
 		return customerID;
 	}
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
+	}
+	public int getStoreID() {
+		return storeID;
+	}
+	public void setStoreID(int storeID) {
+		this.storeID = storeID;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -58,6 +59,12 @@ public class Customer {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getAddressID() {
+		return addressID;
+	}
+	public void setAddressID(int addressID) {
+		this.addressID = addressID;
 	}
 	public int getActive() {
 		return active;
@@ -79,8 +86,8 @@ public class Customer {
 	}
 	
 	public String toString(){
-		return getCustomerID() +" " + getFirstName() +" " + getLastName()
-			+" " + getEmail() +" " + getActive() +" " + getCreateDate()+
+		return getCustomerID() +" " + getStoreID() + " " + getFirstName() +" " + getLastName()
+			+" " + getEmail() +" " + getAddressID() +" " + getActive() +" " + getCreateDate()+
 			" " +getLastName();
 	}
 }

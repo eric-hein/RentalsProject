@@ -47,7 +47,7 @@ public class Country {
 	public String listOfCities() {
 		String retString = "";
 		for (City city : cityList) {
-			retString += city.getCity();
+			retString += city.getCity() + " ";
 		}
 		return retString;
 	}
