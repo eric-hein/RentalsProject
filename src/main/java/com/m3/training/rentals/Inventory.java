@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,29 +15,22 @@ public class Inventory {
 	@Id
 	@Column(name = "INVENTORY_ID")
 	private int inventoryID;
-	@Column(name = "FILM_ID")
-	private int filmID;
-	@Column(name = "STORE_ID")
-	private int storeID;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@ManyToOne
+    @JoinColumn(name = "FILM_ID")
+	private Film film;
+	
+	@ManyToOne
+    @JoinColumn(name = "STORE_ID")
+	private Store store;
+	
 	public int getInventoryID() {
 		return inventoryID;
 	}
 	public void setInventoryID(int inventoryID) {
 		this.inventoryID = inventoryID;
-	}
-	public int getFilmID() {
-		return filmID;
-	}
-	public void setFilmID(int filmID) {
-		this.filmID = filmID;
-	}
-	public int getStoreID() {
-		return storeID;
-	}
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
 	}
 	public Date getLastUpdate() {
 		return lastUpdate;

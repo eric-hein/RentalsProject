@@ -1,13 +1,16 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +42,9 @@ public class Film {
 	
 	@ManyToMany
 	private Set<Language> languages = new HashSet<Language>();
+	
+	@OneToMany(mappedBy = "film")
+	private List<Inventory> inventoryList = new ArrayList<>();
 	
 	public int getFilmID() {
 		return filmID;

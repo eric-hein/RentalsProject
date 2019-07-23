@@ -30,6 +30,9 @@ public class Store {
 	@OneToMany(mappedBy = "store")
 	private List<Customer> customerList = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "store")
+	private List<Inventory> inventoryList = new ArrayList<>();
+	
 	public int getStoreID() {
 		return storeID;
 	}
