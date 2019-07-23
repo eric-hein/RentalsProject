@@ -56,7 +56,7 @@ public class Address {
 	public String getDistrict() {
 		return district;
 	}
-	public void setDistric(String distric) {
+	public void setDistric(String district) {
 		this.district = district;
 	}
 	public int getCityID() {
