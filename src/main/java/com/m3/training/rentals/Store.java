@@ -1,10 +1,13 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +15,7 @@ import javax.persistence.Table;
 public class Store {
 
 	@Id
-	@Column
+	@Column(name = "STORE_ID")
 	private int storeID;
 	
 	@Column(name = "MANAGER_STAFF_ID")
@@ -23,6 +26,9 @@ public class Store {
 	
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@OneToMany(mappedBy = "store")
+	private List<Customer> customerList = new ArrayList<>();
 	
 	public int getStoreID() {
 		return storeID;

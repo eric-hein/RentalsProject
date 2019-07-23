@@ -15,7 +15,7 @@ public abstract class DAO implements AutoCloseable{
 
 	private final String PROPERTIES_PATH = "src/main/resources/queries.properties";
 	private static EntityManagerFactory factory;
-	private EntityManager em;
+	protected EntityManager em;
 
 	Connection dbConnection;
 	

@@ -1,14 +1,17 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FIRM")
+@Table(name = "FILM")
 public class Film {
 	@Id
 	@Column(name = "FILM_ID")
@@ -19,10 +22,6 @@ public class Film {
 	private String description;
 	@Column(name = "RELEASE_YEAR")
 	private int releaseYear;
-	@Column(name = "LANGUAGE_ID")
-	private int languageID;
-	@Column(name = "ORIGINAL_LANGUAGE_ID")
-	private int originalLanguageID;
 	@Column(name = "RENTAL_DURATION")
 	private int rentalDuration;
 	@Column(name = "RENTAL_RATE")
@@ -37,6 +36,9 @@ public class Film {
 	private String specialFeatures;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@ManyToMany
+	private Set<Language> languages = new HashSet<Language>();
 	
 	public int getFilmID() {
 		return filmID;
@@ -55,18 +57,6 @@ public class Film {
 	}
 	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
-	}
-	public int getLanguageID() {
-		return languageID;
-	}
-	public void setLanguageID(int languageID) {
-		this.languageID = languageID;
-	}
-	public int getOriginalLanguageID() {
-		return originalLanguageID;
-	}
-	public void setOriginalLanguageID(int originalLanguageID) {
-		this.originalLanguageID = originalLanguageID;
 	}
 	public int getRentalDuration() {
 		return rentalDuration;
@@ -112,8 +102,9 @@ public class Film {
 	}
 	
 	public String toString() {
-		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " + getLanguageID()+" " +getOriginalLanguageID() +" " +getRentalDuration() +" " +
+		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " +getRentalDuration() +" " +
 				getRentalRate()+" " +
 				getLength()+" " +getReplacementCost() +" " + getRating()+" " + getSpecialFeatures()+" " + getLastUpdate();
 	}
 }
+
