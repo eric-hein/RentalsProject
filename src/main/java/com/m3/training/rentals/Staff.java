@@ -1,10 +1,15 @@
 package com.m3.training.rentals;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,34 +17,41 @@ import javax.persistence.Table;
 public class Staff {
 
 	@Id
-	private int staffId;
-	
+	@Column(name = "STAFF_ID")
+	private int staffId;	
 	@Column(name = "FIRST_NAME")
-	private String firstName;
-	
+	private String firstName;	
 	@Column(name = "LAST_NAME")
-	private String lastName;
-	
+	private String lastName;	
 	@Column(name = "ADDRESS_ID")
-	private int addressID;
-		
+	private int addressID;		
 	@Column(name = "EMAIL")
-	private String email;
-	
+	private String email;	
 	@Column(name = "STORE_ID")
-	private int storeID;
-	
+	private int storeID;	
 	@Column(name = "ACTIVE")
-	private int active;
-	
+	private int active;	
 	@Column(name = "USERNAME")
 	private String username;
-
 	@Column(name = "PASSWORD")
 	private String password;
-
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@ManyToOne
+    @JoinColumn(name = "STORE_ID")
+	private Store store;
+	@OneToMany(mappedBy = "staff")
+	private List<Store> storeList = new ArrayList<>();
+	@OneToMany(mappedBy = "staff")
+	private List<Payment> paymentList = new ArrayList<>();
+	@OneToMany(mappedBy = "staff")
+	private List<Rental> rentalList = new ArrayList<>();
+
+	// FIXME: Uh... is this right?
+	@OneToMany(mappedBy = "store")
+	private List<Customer> customerList = new ArrayList<>();
+
 	
 	public int getStaffId() {
 		return staffId;
@@ -102,11 +114,34 @@ public class Staff {
 		this.lastUpdate = lastUpdate;
 	}
 	
+	/*
+	public void addPayment(Payment payment) {
+		this.payments.add(payment);
+		if(payment.getRenter() != this) {
+			payment.setRenter(this);
+		}
+	}
+	
+	public List<Payment> getPayments() {
+		return payments;
+	}
+	
+	public void addRental(Rental rental) {
+		this.rentals.add(rental);
+		if(rental.getRenter() != this) {
+			rental.setRenter(this);
+		}
+	}
+	
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+	*/
+	
 	public String toString() {
 		return "ID: " + staffId + ", Name: " + firstName + " " + lastName + ", Address ID: " + addressID + ",\n E-Mail: "
 				+ email + ", Store ID: " + storeID + ", Active: " + active + ", Username: " + username + ", Password:\n " +
 				password + ", Last Updated: " + lastUpdate;
-	}
-	
+	}	
 	
 }

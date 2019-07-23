@@ -61,7 +61,7 @@ public class Actor {
 	public String getListOfFilms() {
 		String retString = "";
 		for (Film film : filmList) {
-			retString += film.getTitle();
+			retString += film.getTitle() + ". ";
 		}
 		return retString;
 	}

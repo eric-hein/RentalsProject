@@ -1,10 +1,15 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +23,13 @@ public class Category {
 	private String name;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@ManyToMany
+	@JoinTable(name = "film_category",
+			joinColumns = @JoinColumn(name = "category_id"),
+			inverseJoinColumns = @JoinColumn(name = "film_id")
+	)
+	private Set<Film> filmList = new HashSet<>();	
 
 	public int getCategoryID() {
 		return categoryID;

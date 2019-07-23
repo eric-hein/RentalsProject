@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class Film {
 	
 	// FIXME: Change originalLanguageID to optional
 	@Column(name = "ORIGINAL_LANGUAGE_ID")
-	private int originalLanguageID;
+	private Integer originalLanguageID;
 	@Column(name = "RENTAL_DURATION")
 	private int rentalDuration;
 	@Column(name = "RENTAL_RATE")
@@ -49,8 +50,11 @@ public class Film {
 	@ManyToMany(mappedBy = "filmList")
 	private Set<Actor> actorList = new HashSet<>();
 	
-	@ManyToMany
-	private Set<Language> languages = new HashSet<Language>();
+	@ManyToMany(mappedBy = "filmList")
+	private Set<Film> filmList = new HashSet<>();
+	
+	@OneToMany(mappedBy = "film")
+	private List<Language> languageList = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "film")
 	private List<Inventory> inventoryList = new ArrayList<>();
@@ -79,10 +83,10 @@ public class Film {
 	public void setLanguageID(int languageID) {
 		this.languageID = languageID;
 	}
-	public int getOriginalLanguageID() {
-		return originalLanguageID;
+	public Optional<Integer> getOriginalLanguageID() {
+		return Optional.ofNullable(originalLanguageID);
 	}
-	public void setOriginalLanguageID(int originalLanguageID) {
+	public void setOriginalLanguageID(Integer originalLanguageID) {
 		this.originalLanguageID = originalLanguageID;
 	}
 	public int getRentalDuration() {
