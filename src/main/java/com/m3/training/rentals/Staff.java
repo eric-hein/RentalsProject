@@ -1,10 +1,13 @@
 package com.m3.training.rentals;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +15,7 @@ import javax.persistence.Table;
 public class Staff {
 
 	@Id
+	@Column(name = "STAFF_ID")
 	private int staffId;
 	
 	@Column(name = "FIRST_NAME")
@@ -40,6 +44,9 @@ public class Staff {
 
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@OneToMany(mappedBy = "renter")
+	private List<Payment> payments = new ArrayList<>();
 	
 	public int getStaffId() {
 		return staffId;
@@ -100,6 +107,17 @@ public class Staff {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	
+	public void addPayment(Payment payment) {
+		this.payments.add(payment);
+		if(payment.getRenter() != this) {
+			payment.setRenter(this);
+		}
+	}
+	
+	public List<Payment> getPayments() {
+		return payments;
 	}
 	
 	public String toString() {

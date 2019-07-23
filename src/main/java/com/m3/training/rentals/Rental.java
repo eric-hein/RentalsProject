@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Rental {
 
 	@Id
+	@Column(name = "RENTAL_ID")
 	private int rentalID;
 	
 	@Column(name = "RENTAL_DATE")

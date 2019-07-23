@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class Language {
 	
 	@Id
+	@Column(name = "LANGUAGE_ID")
 	private int languageID;
 	
 	@Column(name = "NAME")
