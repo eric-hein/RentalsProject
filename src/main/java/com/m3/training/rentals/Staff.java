@@ -45,8 +45,16 @@ public class Staff {
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 	
-	@OneToMany(mappedBy = "renter")
+	@OneToMany(mappedBy = "paymentRenter")
 	private List<Payment> payments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "rentalRenter")
+	private List<Rental> rentals = new ArrayList<>();
+
+	
+	@OneToMany(mappedBy = "store")
+	private List<Customer> customerList = new ArrayList<>();
+
 	
 	public int getStaffId() {
 		return staffId;
@@ -120,11 +128,21 @@ public class Staff {
 		return payments;
 	}
 	
+	public void addRental(Rental rental) {
+		this.rentals.add(rental);
+		if(rental.getRenter() != this) {
+			rental.setRenter(this);
+		}
+	}
+	
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+	
 	public String toString() {
 		return "ID: " + staffId + ", Name: " + firstName + " " + lastName + ", Address ID: " + addressID + ",\n E-Mail: "
 				+ email + ", Store ID: " + storeID + ", Active: " + active + ", Username: " + username + ", Password:\n " +
 				password + ", Last Updated: " + lastUpdate;
-	}
-	
+	}	
 	
 }

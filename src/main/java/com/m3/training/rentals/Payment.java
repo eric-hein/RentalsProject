@@ -37,7 +37,7 @@ public class Payment {
 
 	@ManyToOne
 	@JoinColumn(name = "STAFF_ID")	
-	private Staff renter;
+	private Staff paymentRenter;
 
 	public int getPaymentID() {
 		return paymentID;
@@ -88,14 +88,14 @@ public class Payment {
 	}
 	
     public void setRenter(Staff renter) {
-        this.renter = renter;
+        this.paymentRenter = renter;
         if (!renter.getPayments().contains(this)) {
             renter.getPayments().add(this);
         }
     }
     
     public Staff getRenter() {
-    	return renter;
+    	return paymentRenter;
     }
 
 	public String toString() {

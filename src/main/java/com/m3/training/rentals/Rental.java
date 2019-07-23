@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ public class Rental {
 	@Id
 	@Column(name = "RENTAL_ID")
 	private int rentalID;
-	
+
 	@Column(name = "RENTAL_DATE")
 	private Date rentalDate;
 
@@ -23,16 +25,17 @@ public class Rental {
 
 	@Column(name = "CUSTOMER_ID")
 	private int customerID;
-	
+
 	@Column(name = "RETURN_DATE")
 	private Date returnDate;
 
-	@Column(name = "STAFF_ID")
-	private int staffID;
-
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "STAFF_ID")	
+	private Staff rentalRenter;
+
 	public int getRentalID() {
 		return rentalID;
 	}
@@ -63,23 +66,30 @@ public class Rental {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
-	public int getStaffId() {
-		return staffID;
-	}
-	public void setStaffId(int staffId) {
-		this.staffID = staffId;
-	}
+
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
+
+	public void setRenter(Staff renter) {
+		this.rentalRenter = renter;
+		if (!renter.getRentals().contains(this)) {
+			renter.getRentals().add(this);
+		}
+	}
+
+	public Staff getRenter() {
+		return rentalRenter;
+	}
+
+
 	public String toString() {
 		return "ID: " + rentalID + ", Inventory ID: " + inventoryID + ", Customer ID: " + customerID + ",\n"
-				+ "Return Date: " + returnDate + ", Staff ID: " + staffID + ", Last Update: " + lastUpdate;
+				+ "Return Date: " + returnDate + ", Last Update: " + lastUpdate;
 	}
-	
-	
+
+
 }
