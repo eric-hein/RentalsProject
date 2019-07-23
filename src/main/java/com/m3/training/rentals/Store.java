@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Store {
 
 	@Id
+	@Column
 	private int storeID;
 	
 	@Column(name = "MANAGER_STAFF_ID")

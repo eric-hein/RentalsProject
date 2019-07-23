@@ -1,10 +1,13 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,9 @@ public class Country {
 	private String country;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@OneToMany(mappedBy = "country")
+	private List<City> cityList = new ArrayList<>();
 	
 	public int getCountryID() {
 		return countryID;
@@ -37,4 +43,12 @@ public class Country {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}	
+	
+	public String listOfCities() {
+		String retString = "";
+		for (City city : cityList) {
+			retString += city.getCity();
+		}
+		return retString;
+	}
 }

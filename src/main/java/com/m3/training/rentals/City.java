@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,11 +18,14 @@ public class City {
 	private int cityID;
 	@Column(name = "city")
 	private String city;
-	@Column(name = "country_ID")
+	@Column(name = "country_id")
 	private int countryID;
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 	
+	@ManyToOne
+	@JoinColumn(name = "country_ID")
+	private Country country;
 	
 	public int getCityID() {
 		return cityID;
@@ -45,5 +50,9 @@ public class City {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	
+	public String toString() {
+		return cityID + ": " + getCity() + ", " + getCountryID() + ": " + country.getCountry() + ". " + getLastUpdate();
 	}
 }

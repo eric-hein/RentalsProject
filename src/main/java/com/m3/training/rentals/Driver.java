@@ -13,5 +13,11 @@ public class Driver {
 		System.out.println("what it do baybeee");
 		factory = Persistence.createEntityManagerFactory("rentalsJPA");
 		EntityManager em = factory.createEntityManager();
+		
+		em.getTransaction().begin();
+		City city = em.find(City.class, 3);
+		System.out.println(city);
+		Country country = em.find(Country.class, 3);
+		System.out.println(country.listOfCities());
 	}
 }
