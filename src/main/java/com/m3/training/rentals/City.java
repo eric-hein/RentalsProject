@@ -56,6 +56,12 @@ public class City {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public Country getCountry() {
+		return country;
+	}
+	public List<Address> getAddressList() {
+		return addressList;
 	}
 	
 	public String toString() {

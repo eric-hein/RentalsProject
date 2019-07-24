@@ -65,7 +65,7 @@ public class Address {
 	public String getDistrict() {
 		return district;
 	}
-	public void setDistric(String district) {
+	public void setDistrict(String district) {
 		this.district = district;
 	}
 	public int getCityID() {
@@ -91,6 +91,15 @@ public class Address {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	public List<Customer> getCustomerList() {
+		return customerList;
+	}
+	public List<Store> getStoreList() {
+		return storeList;
+	}
+	public City getCity() {
+		return city;
 	}
 	
 	public String toString() {

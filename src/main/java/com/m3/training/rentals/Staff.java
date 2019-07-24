@@ -27,8 +27,6 @@ public class Staff {
 	private int addressID;		
 	@Column(name = "EMAIL")
 	private String email;	
-	@Column(name = "STORE_ID")
-	private int storeID;	
 	@Column(name = "ACTIVE")
 	private int active;	
 	@Column(name = "USERNAME")
@@ -47,11 +45,6 @@ public class Staff {
 	private List<Payment> paymentList = new ArrayList<>();
 	@OneToMany(mappedBy = "staff")
 	private List<Rental> rentalList = new ArrayList<>();
-
-	// FIXME: Uh... is this right?
-	@OneToMany(mappedBy = "store")
-	private List<Customer> customerList = new ArrayList<>();
-
 	
 	public int getStaffId() {
 		return staffId;
@@ -83,12 +76,6 @@ public class Staff {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getStoreId() {
-		return storeID;
-	}
-	public void setStoreId(int storeId) {
-		this.storeID = storeId;
-	}
 	public int getActive() {
 		return active;
 	}
@@ -113,34 +100,21 @@ public class Staff {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
-	/*
-	public void addPayment(Payment payment) {
-		this.payments.add(payment);
-		if(payment.getRenter() != this) {
-			payment.setRenter(this);
-		}
+	public Store getStore() {
+		return store;
 	}
-	
-	public List<Payment> getPayments() {
-		return payments;
+	public List<Store> getStoreList() {
+		return storeList;
 	}
-	
-	public void addRental(Rental rental) {
-		this.rentals.add(rental);
-		if(rental.getRenter() != this) {
-			rental.setRenter(this);
-		}
+	public List<Payment> getPaymentList() {
+		return paymentList;
 	}
-	
-	public List<Rental> getRentals() {
-		return rentals;
+	public List<Rental> getRentalList() {
+		return rentalList;
 	}
-	*/
-	
 	public String toString() {
 		return "ID: " + staffId + ", Name: " + firstName + " " + lastName + ", Address ID: " + addressID + ",\n E-Mail: "
-				+ email + ", Store ID: " + storeID + ", Active: " + active + ", Username: " + username + ", Password:\n " +
+				+ email + ", Active: " + active + ", Username: " + username + ", Password:\n " +
 				password + ", Last Updated: " + lastUpdate;
 	}	
 	

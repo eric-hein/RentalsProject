@@ -23,12 +23,6 @@ public class Rental {
 	@Column(name = "RENTAL_DATE")
 	private Date rentalDate;
 
-	@Column(name = "INVENTORY_ID")
-	private int inventoryID;
-
-	@Column(name = "CUSTOMER_ID")
-	private int customerID;
-
 	@Column(name = "RETURN_DATE")
 	private Date returnDate;
 
@@ -38,10 +32,14 @@ public class Rental {
 	@ManyToOne
 	@JoinColumn(name = "INVENTORY_ID")
 	private Inventory inventory;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "STAFF_ID")	
 	private Staff staff;
+	
+	@ManyToOne
+	@JoinColumn(name = "CUSTOMER_ID")
+	private Customer customer;
 	
 	@OneToMany
 	private List<Payment> paymentList = new ArrayList<>();
@@ -58,18 +56,6 @@ public class Rental {
 	public void setRentalDate(Date rentalDate) {
 		this.rentalDate = rentalDate;
 	}
-	public int getInventoryID() {
-		return inventoryID;
-	}
-	public void setInventoryID(int inventoryID) {
-		this.inventoryID = inventoryID;
-	}
-	public int getCustomerID() {
-		return customerID;
-	}
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
-	}
 	public Date getReturnDate() {
 		return returnDate;
 	}
@@ -84,22 +70,19 @@ public class Rental {
 		this.lastUpdate = lastUpdate;
 	}
 
-	/*
-	public void setRenter(Staff renter) {
-		this.rentalRenter = renter;
-		if (!renter.getRentals().contains(this)) {
-			renter.getRentals().add(this);
-		}
+	public Inventory getInventory() {
+		return inventory;
 	}
-
-	public Staff getRenter() {
-		return rentalRenter;
+	public Staff getStaff() {
+		return staff;
 	}
-*/
+	public List<Payment> getPaymentList() {
+		return paymentList;
+	}
 
 	public String toString() {
-		return "ID: " + rentalID + ", Inventory ID: " + inventoryID + ", Customer ID: " + customerID + ",\n"
-				+ "Return Date: " + returnDate + ", Last Update: " + lastUpdate;
+		return "ID: " + rentalID + ",\n" + "Return Date: " + returnDate + 
+				", Last Update: " + lastUpdate;
 	}
 
 

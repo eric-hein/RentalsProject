@@ -42,7 +42,10 @@ public class Country {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}	
+	}		
+	public List<City> getCityList() {
+		return cityList;
+	}
 	
 	public String listOfCities() {
 		String retString = "";

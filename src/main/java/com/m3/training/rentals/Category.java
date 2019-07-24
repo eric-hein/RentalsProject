@@ -49,4 +49,7 @@ public class Category {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	public Set<Film> getFilmList() {
+		return filmList;
+	}
 }

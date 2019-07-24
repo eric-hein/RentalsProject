@@ -38,6 +38,8 @@ public class Customer {
     @JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 	@OneToMany
+	private List<Rental> rentalsMade = new ArrayList<>();
+	@OneToMany
 	private List<Payment> paymentsMade = new ArrayList<>();
 	
 	public int getCustomerID() {
@@ -81,6 +83,18 @@ public class Customer {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public Store getStore() {
+		return store;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public List<Rental> getRentalsMade() {
+		return rentalsMade;
+	}
+	public List<Payment> getPaymentsMade() {
+		return paymentsMade;
 	}
 	
 	public String toString(){
