@@ -23,12 +23,6 @@ public class Rental {
 	@Column(name = "RENTAL_DATE")
 	private Date rentalDate;
 
-	@Column(name = "INVENTORY_ID")
-	private int inventoryID;
-
-	@Column(name = "CUSTOMER_ID")
-	private int customerID;
-
 	@Column(name = "RETURN_DATE")
 	private Date returnDate;
 
@@ -42,6 +36,10 @@ public class Rental {
 	@ManyToOne
 	@JoinColumn(name = "STAFF_ID")	
 	private Staff staff;
+	
+	@ManyToOne
+	@JoinColumn(name = "CUSTOMER_ID")
+	private Customer customer;
 	
 	@OneToMany
 	private List<Payment> paymentList = new ArrayList<>();
@@ -57,18 +55,6 @@ public class Rental {
 	}
 	public void setRentalDate(Date rentalDate) {
 		this.rentalDate = rentalDate;
-	}
-	public int getInventoryID() {
-		return inventoryID;
-	}
-	public void setInventoryID(int inventoryID) {
-		this.inventoryID = inventoryID;
-	}
-	public int getCustomerID() {
-		return customerID;
-	}
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
 	}
 	public Date getReturnDate() {
 		return returnDate;
@@ -95,8 +81,8 @@ public class Rental {
 	}
 
 	public String toString() {
-		return "ID: " + rentalID + ", Inventory ID: " + inventoryID + ", Customer ID: " + customerID + ",\n"
-				+ "Return Date: " + returnDate + ", Last Update: " + lastUpdate;
+		return "ID: " + rentalID + ",\n" + "Return Date: " + returnDate + 
+				", Last Update: " + lastUpdate;
 	}
 
 

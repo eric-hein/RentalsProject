@@ -50,9 +50,6 @@ public class Film {
 	@ManyToMany(mappedBy = "filmList")
 	private Set<Actor> actorList = new HashSet<>();
 	
-	@ManyToMany(mappedBy = "filmList")
-	private Set<Film> filmList = new HashSet<>();
-	
 	@OneToMany(mappedBy = "film")
 	private List<Language> languageList = new ArrayList<>();
 	
@@ -137,17 +134,13 @@ public class Film {
 	public Set<Actor> getActorList() {
 		return actorList;
 	}
-	public Set<Film> getFilmList() {
-		return filmList;
-	}
 	public List<Language> getLanguageList() {
 		return languageList;
 	}
 	public List<Inventory> getInventoryList() {
 		return inventoryList;
 	}
-	
-	
+		
 	public String toString() {
 		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " + getLanguageID()+" " +
 			getOriginalLanguageID() +" " +getRentalDuration() +" " + getRentalRate()+" " + getLength()

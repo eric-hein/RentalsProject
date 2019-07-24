@@ -1,15 +1,12 @@
 package com.m3.training.rentals;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +16,6 @@ public class Payment {
 	@Id
 	@Column(name = "PAYMENT_ID")
 	private int paymentID;
-	@Column(name = "CUSTOMER_ID")
-	private int customerID;
 	@Column(name = "AMOUNT")
 	private int amount;
 	@Column(name = "PAYMENT_DATE")
@@ -46,14 +41,6 @@ public class Payment {
 	
 	public void setPaymentID(int paymentIsD) {
 		this.paymentID = paymentIsD;
-	}
-	
-	public int getCustomerID() {
-		return customerID;
-	}
-	
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
 	}
 	
 	public int getAmount() {
@@ -92,9 +79,8 @@ public class Payment {
 	}
 
 	public String toString() {
-		return "ID: " + paymentID + ", Customer ID: " + customerID + /*",\n"
-				+ " Rental ID " + rentalID + */", Amount: " + amount + ", Payment Date: " + paymentDate + ", "
-				+ "Last Update: " + lastUpdate;
+		return "\nID: " + paymentID + ", Amount: " + 
+				amount + ", Payment Date: " + paymentDate + ", " + "Last Update: " + lastUpdate;
 
 	}	
 }

@@ -20,9 +20,6 @@ public class Store {
 	@Column(name = "STORE_ID")
 	private int storeID;
 	
-	@Column(name = "MANAGER_STAFF_ID")
-	private int managerStaffID;
-	
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 	
@@ -42,7 +39,7 @@ public class Store {
 	
 	// 1 employee can work at multiple stores
 	@ManyToOne
-	@JoinColumn(name = "staff_id")
+	@JoinColumn(name = "manager_staff_id")
 	private Staff staff;
 	
 	public int getStoreID() {
@@ -51,20 +48,12 @@ public class Store {
 	public void setStoreID(int storeID) {
 		this.storeID = storeID;
 	}
-	public int getManagerStaffID() {
-		return managerStaffID;
-	}
-	public void setManagerStaffID(int managerStaffId) {
-		this.managerStaffID = managerStaffId;
-	}
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
-	
 	
 	public Address getAddress() {
 		return address;
@@ -82,6 +71,6 @@ public class Store {
 		return staff;
 	}
 	public String toString() {
-		return "ID: " + storeID + ", Manager Staff ID: " + managerStaffID + ", Address ID: " + address.getAddressID() + ", Last Update " + lastUpdate.toString();
+		return "ID: " + storeID + ", Address ID: " + address.getAddressID() + ", Last Update " + lastUpdate.toString();
 	}	
 }
