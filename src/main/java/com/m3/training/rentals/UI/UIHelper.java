@@ -12,10 +12,6 @@ public class UIHelper {
 		scanner = new Scanner(System.in);
 	}
 	
-	public static String parseEmail(String email) {
-		//StringBuilder sb
-		return email;
-	}
 	
 	public String readInput() {
 		String input = scanner.nextLine(); 
