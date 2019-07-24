@@ -130,7 +130,23 @@ public class Film {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public String getDescription() {
+		return description;
 	}
+	public Set<Actor> getActorList() {
+		return actorList;
+	}
+	public Set<Film> getFilmList() {
+		return filmList;
+	}
+	public List<Language> getLanguageList() {
+		return languageList;
+	}
+	public List<Inventory> getInventoryList() {
+		return inventoryList;
+	}
+	
 	
 	public String toString() {
 		return getFilmID() + " " +getTitle() +" " +getReleaseYear() +" " + getLanguageID()+" " +

@@ -44,6 +44,14 @@ public class Inventory {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
+	public Film getFilm() {
+		return film;
+	}
+	public Store getStore() {
+		return store;
+	}
+	public List<Rental> getRentalList() {
+		return rentalList;
+	}
 	
 }

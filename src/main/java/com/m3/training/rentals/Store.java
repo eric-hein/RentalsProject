@@ -64,6 +64,23 @@ public class Store {
 		this.lastUpdate = lastUpdate;
 	}
 	
+	
+	
+	public Address getAddress() {
+		return address;
+	}
+	public List<Customer> getCustomerList() {
+		return customerList;
+	}
+	public List<Inventory> getInventoryList() {
+		return inventoryList;
+	}
+	public List<Staff> getStaffList() {
+		return staffList;
+	}
+	public Staff getStaff() {
+		return staff;
+	}
 	public String toString() {
 		return "ID: " + storeID + ", Manager Staff ID: " + managerStaffID + ", Address ID: " + address.getAddressID() + ", Last Update " + lastUpdate.toString();
 	}	

@@ -114,30 +114,24 @@ public class Staff {
 		this.lastUpdate = lastUpdate;
 	}
 	
-	/*
-	public void addPayment(Payment payment) {
-		this.payments.add(payment);
-		if(payment.getRenter() != this) {
-			payment.setRenter(this);
-		}
+	public int getStoreID() {
+		return storeID;
 	}
-	
-	public List<Payment> getPayments() {
-		return payments;
+	public Store getStore() {
+		return store;
 	}
-	
-	public void addRental(Rental rental) {
-		this.rentals.add(rental);
-		if(rental.getRenter() != this) {
-			rental.setRenter(this);
-		}
+	public List<Store> getStoreList() {
+		return storeList;
 	}
-	
-	public List<Rental> getRentals() {
-		return rentals;
+	public List<Payment> getPaymentList() {
+		return paymentList;
 	}
-	*/
-	
+	public List<Rental> getRentalList() {
+		return rentalList;
+	}
+	public List<Customer> getCustomerList() {
+		return customerList;
+	}
 	public String toString() {
 		return "ID: " + staffId + ", Name: " + firstName + " " + lastName + ", Address ID: " + addressID + ",\n E-Mail: "
 				+ email + ", Store ID: " + storeID + ", Active: " + active + ", Username: " + username + ", Password:\n " +

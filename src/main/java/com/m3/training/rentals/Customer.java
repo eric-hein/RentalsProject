@@ -81,6 +81,15 @@ public class Customer {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public Store getStore() {
+		return store;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public List<Payment> getPaymentsMade() {
+		return paymentsMade;
 	}
 	
 	public String toString(){

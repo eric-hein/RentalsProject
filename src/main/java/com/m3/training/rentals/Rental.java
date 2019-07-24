@@ -38,7 +38,7 @@ public class Rental {
 	@ManyToOne
 	@JoinColumn(name = "INVENTORY_ID")
 	private Inventory inventory;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "STAFF_ID")	
 	private Staff staff;
@@ -84,18 +84,15 @@ public class Rental {
 		this.lastUpdate = lastUpdate;
 	}
 
-	/*
-	public void setRenter(Staff renter) {
-		this.rentalRenter = renter;
-		if (!renter.getRentals().contains(this)) {
-			renter.getRentals().add(this);
-		}
+	public Inventory getInventory() {
+		return inventory;
 	}
-
-	public Staff getRenter() {
-		return rentalRenter;
+	public Staff getStaff() {
+		return staff;
 	}
-*/
+	public List<Payment> getPaymentList() {
+		return paymentList;
+	}
 
 	public String toString() {
 		return "ID: " + rentalID + ", Inventory ID: " + inventoryID + ", Customer ID: " + customerID + ",\n"

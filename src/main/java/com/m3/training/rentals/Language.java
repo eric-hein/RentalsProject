@@ -45,9 +45,10 @@ public class Language {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public Film getFilm() {
+		return film;
 	}
-	
-	
 	public String toString() {
 		return "ID: " + languageID + ", Name: " + name + ", Last Updated: " + lastUpdate;
 	}

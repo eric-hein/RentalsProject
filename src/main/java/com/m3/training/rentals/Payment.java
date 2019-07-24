@@ -44,7 +44,7 @@ public class Payment {
 		return paymentID;
 	}
 	
-	public void setPaymentIsD(int paymentIsD) {
+	public void setPaymentID(int paymentIsD) {
 		this.paymentID = paymentIsD;
 	}
 	
@@ -55,15 +55,7 @@ public class Payment {
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
-
-/*	public int getRentalID() {
-		return rentalID;
-	}
 	
-	public void setRentalID(int rentalID) {
-		this.rentalID = rentalID;
-	}
-*/	
 	public int getAmount() {
 		return amount;
 	}
@@ -86,21 +78,19 @@ public class Payment {
 	
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}	
+	public Staff getStaff() {
+		return staff;
 	}
-	
-	/*
-    public void setRenter(Staff renter) {
-        this.paymentRenter = renter;
-        if (!renter.getPayments().contains(this)) {
-            renter.getPayments().add(this);
-        }
-    }
-    
-    public Staff getRenter() {
-    	return paymentRenter;
-    }
-*/
-	
+
+	public Rental getRental() {
+		return rental;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
 	public String toString() {
 		return "ID: " + paymentID + ", Customer ID: " + customerID + /*",\n"
 				+ " Rental ID " + rentalID + */", Amount: " + amount + ", Payment Date: " + paymentDate + ", "
