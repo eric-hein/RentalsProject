@@ -99,7 +99,6 @@ public class Customer {
 	
 	public String toString(){
 		return getCustomerID() +" " + getFirstName() +" " + getLastName()
-			+" " + getEmail() +" " + getActive() +" " + getCreateDate()+
-			" " +getLastName();
+			+" " + getEmail() +" " + getActive() +" " + getCreateDate();
 	}
 }
