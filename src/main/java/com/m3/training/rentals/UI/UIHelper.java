@@ -12,6 +12,7 @@ public class UIHelper {
 		scanner = new Scanner(System.in);
 	}
 	
+	
 	public String readInput() {
 		String input = scanner.nextLine(); 
 		input=input.toLowerCase();
