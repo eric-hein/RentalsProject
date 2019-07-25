@@ -1,29 +1,22 @@
 package com.m3.training.rentals.UI;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Scanner;
 
-import com.m3.training.rentals.Customer;
 import com.m3.training.rentals.Film;
 import com.m3.training.rentals.dao.FilmDAO;
-import com.m3.training.rentals.errorlogging.ErrorLogger;
-import com.m3.training.rentals.utility.ParseTools;
 
 public class FilmUI implements IUserInterface {
 
 	private Map<String, IUserInterface> states;
 	private UIHelper helper;
 	private IUserInterface nextState = this;
-	private ErrorLogger errorLogger;
 	FilmDAO dao;
 	
-	public FilmUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger, FilmDAO dao) {
+	public FilmUI(Map<String, IUserInterface> states, UIHelper helper, FilmDAO dao) {
 		this.states= states;
 		this.helper = helper;
-		this.errorLogger = errorLogger;
 		this.dao = dao;
 	}
 	

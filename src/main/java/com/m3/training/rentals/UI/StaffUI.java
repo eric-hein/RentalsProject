@@ -3,17 +3,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.m3.training.rentals.Rental;
-import com.m3.training.rentals.dao.RentalDAO;
+import com.m3.training.rentals.Staff;
+import com.m3.training.rentals.dao.StaffDAO;
+import com.m3.training.rentals.errorlogging.ErrorLogger;
 
-public class RentalUI implements IUserInterface {
+public class StaffUI implements IUserInterface {
 
 	private Map<String, IUserInterface> states;
 	private UIHelper helper;
 	private IUserInterface nextState = this;
-	RentalDAO dao;
+	StaffDAO dao;
 	
-	public RentalUI(Map<String, IUserInterface> states, UIHelper helper, RentalDAO dao) {
+	public StaffUI(Map<String, IUserInterface> states, UIHelper helper, StaffDAO dao) {
 		this.states= states;
 		this.helper = helper;
 		this.dao = dao;
@@ -25,23 +26,18 @@ public class RentalUI implements IUserInterface {
 	}
 
 	
-	private void printResult (Optional<List<Rental>> result) {
-		List<Rental> resultList = result.get();
-		for (Rental rental: resultList) {
-			System.out.println(" Renter's name: " + rental.getCustomer().getFirstName() + " " + rental.getCustomer().getLastName() + " Title: " + rental.getInventory().getFilm().getTitle() + " Date Rented " + rental.getRentalDate() );
+	private void printResult (Optional<List<Staff>> result) {
+		List<Staff> resultList = result.get();
+		for (Staff staff: resultList) {
+			System.out.println(" Staff's name: " + staff.getFirstName() + " " + staff.getLastName() + " Email: " + staff.getEmail() + " Employee ID " + staff.getStaffId() );
 		}
 	}
 	
-	private void printResultBest (List<Object[]> resultList) {
-		for (Object[] object: resultList) {
-			System.out.println("Title: " + object[0] + " Times Rented: " + object[1] + " Rental Price: " + object[2]+ " Gross Profit: " + object[3] );
-		}
-	}
 	
 	@Override
 	public void execute() throws IllegalStateException {
-		System.out.println("This is the rental search. What would you like to look at?");
-		System.out.println("Please use the proper command: (outstanding, bestselling)");
+		System.out.println("This is the staff database!");
+		System.out.println("Please input \"Get Staff\" to get staff");
 		String input = helper.readInput();
 		switch(input) {
 			case "home":
@@ -50,13 +46,9 @@ public class RentalUI implements IUserInterface {
 			case "back":
 				this.changeNextState("home");
 				break;
-			case "outstanding":
-				Optional<List<Rental>> result = dao.getActiveRentals();
+			case "get staff":
+				Optional<List<Staff>> result = dao.getStaff();
 				printResult(result);
-				break;
-			case "bestselling":
-				List<Object[]> result2 = dao.getRentalActivity();
-				printResultBest(result2);
 				break;
 			case "exit":
 				this.setNextState(null);

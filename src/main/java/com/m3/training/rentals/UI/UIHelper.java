@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import com.m3.training.rentals.dao.CustomerDAO;
 import com.m3.training.rentals.dao.FilmDAO;
+import com.m3.training.rentals.dao.InventoryDAO;
 import com.m3.training.rentals.dao.RentalDAO;
+import com.m3.training.rentals.dao.StaffDAO;
 import com.m3.training.rentals.errorlogging.ErrorLogger;
 
 public class UIHelper {
@@ -29,10 +31,12 @@ public class UIHelper {
 	
 	public IUserInterface initStates() throws SQLException{
 		Map<String, IUserInterface> states = new HashMap<>();
-		states.put("home", new HomeUI(states, this, errorLogger));
-		states.put("customer", new CustomerUI(states, this, errorLogger, new CustomerDAO()));
-		states.put("film", new FilmUI(states, this, errorLogger, new FilmDAO()));
-		states.put("rental", new RentalUI(states, this, errorLogger, new RentalDAO()));
+		states.put("home", new HomeUI(states, this));
+		states.put("customer", new CustomerUI(states, this, new CustomerDAO()));
+		states.put("film", new FilmUI(states, this, new FilmDAO()));
+		states.put("rental", new RentalUI(states, this, new RentalDAO()));
+		states.put("staff", new StaffUI(states, this, new StaffDAO()));
+		states.put("inventory", new InventoryUI(states, this, new InventoryDAO()));
 		
 		return states.get("home");
 	}

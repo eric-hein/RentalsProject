@@ -1,20 +1,15 @@
 package com.m3.training.rentals.UI;
 import java.util.Map;
-import java.util.Scanner;
-
-import com.m3.training.rentals.errorlogging.ErrorLogger;
 
 public class HomeUI implements IUserInterface {
 
 	private Map<String, IUserInterface> states;
 	private UIHelper helper;
 	private IUserInterface nextState = this;
-	private ErrorLogger errorLogger;
 	
-	public HomeUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger) {
+	public HomeUI(Map<String, IUserInterface> states, UIHelper helper) {
 		this.states= states;
 		this.helper = helper;
-		this.errorLogger = errorLogger;
 	}
 	
 	@Override
@@ -26,7 +21,7 @@ public class HomeUI implements IUserInterface {
 	@Override
 	public void execute()  throws IllegalStateException{
 		System.out.println("Hello. Welcome to the Rental Database.");
-		System.out.println("Please type the category you want to search: Customer, Film, Rentals");
+		System.out.println("Please type the category you want to search: Customer, Film, Rentals, Staff, Inventory");
 		String input = helper.readInput();
 		switch(input) {
 			case "customer":
@@ -40,6 +35,12 @@ public class HomeUI implements IUserInterface {
 				break;
 			case "home":
 				this.changeNextState("home");
+				break;
+			case "staff":
+				this.changeNextState("staff");
+				break;
+			case "inventory":
+				this.changeNextState("inventory");
 				break;
 			case "back":
 				System.out.println("This is already the home.");

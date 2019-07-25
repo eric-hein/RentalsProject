@@ -6,6 +6,7 @@ public class ParseTools {
 		if (email==null) return null;
 		StringBuilder sb = new StringBuilder();
 		int indexOfAt = email.indexOf('@');
+		if (indexOfAt<0) return email.toUpperCase();
 		sb.append(email.substring(0, indexOfAt).toUpperCase());
 		sb.append("@");
 		sb.append(email.substring(indexOfAt+1, email.length()).toLowerCase());
