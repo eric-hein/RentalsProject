@@ -1,11 +1,7 @@
 package com.m3.training.rentals.utility;
 
 public class ParseTools {
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/eric-hein/RentalsProject
+
 	public static String caseEmail(String email) {
 		StringBuilder sb = new StringBuilder();
 		int indexOfAt = email.indexOf('@');
