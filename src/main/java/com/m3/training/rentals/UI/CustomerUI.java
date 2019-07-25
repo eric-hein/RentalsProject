@@ -9,6 +9,7 @@ import java.util.Scanner;
 import com.m3.training.rentals.Customer;
 import com.m3.training.rentals.dao.CustomerDAO;
 import com.m3.training.rentals.errorlogging.ErrorLogger;
+import com.m3.training.rentals.utility.ParseTools;
 
 public class CustomerUI implements IUserInterface {
 
@@ -30,7 +31,7 @@ public class CustomerUI implements IUserInterface {
 		return nextState;
 	}
 
-	Optional<List<Customer>> executeQuery(String query) throws SQLException{
+	Optional<List<Customer>> executeQuery(String query){
 		if (query==null || query.equals("")) return null;
 		int index=0;
 		Map<String, String> queryParts = new HashMap<String,String>();
@@ -55,10 +56,14 @@ public class CustomerUI implements IUserInterface {
 			index++;
 		}
 		queryParts.put(currPart, sb.toString());
-		System.out.println("This is the first name:" + queryParts.get("-fname"));
-		System.out.println("This is the last name:" + queryParts.get("-lname"));
-		System.out.println("This is the email:" + queryParts.get("-email"));
-		return dao.readByPartialInfo(queryParts.get("-fname"), queryParts.get("-lname"), queryParts.get("-email")) ;
+		return dao.readByPartialInfo(queryParts.get("-fname"), queryParts.get("-lname"), ParseTools.caseEmail(queryParts.get("-email"))) ;
+	}
+	
+	private void printResult (Optional<List<Customer>> result) {
+		List<Customer> resultList = result.get();
+		for (Customer customer: resultList) {
+			System.out.println("First Name: " + customer.getFirstName() + "Last Name: " + customer.getLastName() + "Email: " + customer.getEmail() );
+		}
 	}
 	
 	@Override
@@ -78,7 +83,12 @@ public class CustomerUI implements IUserInterface {
 				break;
 			default:
 				this.setNextState(this);
+				Optional<List<Customer>> result =executeQuery(input);
+				if (result.isPresent()) {
+					printResult(result);
+				}else {
 				System.out.println("That was not a valid option. Please try again.");
+				}
 		}
 	}
 	

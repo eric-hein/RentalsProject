@@ -1,8 +1,17 @@
 package com.m3.training.rentals.UI;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 
+import com.m3.training.rentals.Customer;
+import com.m3.training.rentals.Rental;
+import com.m3.training.rentals.dao.CustomerDAO;
+import com.m3.training.rentals.dao.RentalDAO;
 import com.m3.training.rentals.errorlogging.ErrorLogger;
+import com.m3.training.rentals.utility.ParseTools;
 
 public class RentalUI implements IUserInterface {
 
@@ -10,11 +19,13 @@ public class RentalUI implements IUserInterface {
 	private UIHelper helper;
 	private IUserInterface nextState = this;
 	private ErrorLogger errorLogger;
+	RentalDAO dao;
 	
-	public RentalUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger) {
+	public RentalUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger, RentalDAO dao) {
 		this.states= states;
 		this.helper = helper;
 		this.errorLogger = errorLogger;
+		this.dao = dao;
 	}
 	
 	@Override
@@ -23,17 +34,38 @@ public class RentalUI implements IUserInterface {
 	}
 
 	
+	private void printResult (Optional<List<Rental>> result) {
+		List<Rental> resultList = result.get();
+		for (Rental rental: resultList) {
+			System.out.println(" Renter's name: " + rental.getCustomer().getFirstName() + " " + rental.getCustomer().getLastName() + " Title: " + rental.getInventory().getFilm().getTitle() + " Date Rented " + rental.getRentalDate() );
+		}
+	}
+	
+	private void printResultBest (List<Object[]> resultList) {
+		for (Object[] object: resultList) {
+			System.out.println("Title: " + object[0] + " Times Rented: " + object[1] + " Rental Price: " + object[2]+ " Gross Profit: " + object[3] );
+		}
+	}
+	
 	@Override
 	public void execute() throws IllegalStateException {
-		System.out.println("How would you like to search rentals?");
+		System.out.println("This is the rental search. What would you like to look at?");
+		System.out.println("Please use the proper command: (outstanding, bestselling)");
 		String input = helper.readInput();
 		switch(input) {
 			case "home":
 				this.changeNextState("home");
 				break;
 			case "back":
-				System.out.println("This is already the home.");
 				this.changeNextState("home");
+				break;
+			case "outstanding":
+				Optional<List<Rental>> result = dao.getActiveRentals();
+				printResult(result);
+				break;
+			case "bestselling":
+				List<Object[]> result2 = dao.getRentalActivity();
+				printResultBest(result2);
 				break;
 			case "exit":
 				this.setNextState(null);

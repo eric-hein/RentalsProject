@@ -6,14 +6,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.m3.training.rentals.dao.CustomerDAO;
+import com.m3.training.rentals.dao.FilmDAO;
+import com.m3.training.rentals.dao.RentalDAO;
 import com.m3.training.rentals.errorlogging.ErrorLogger;
 
 public class UIHelper {
 	
 	private Scanner scanner;
+	ErrorLogger errorLogger;
 	
-	public UIHelper() {
+	public UIHelper(ErrorLogger errorLogger) {
 		scanner = new Scanner(System.in);
+		this.errorLogger = errorLogger;
 	}
 	
 	public String readInput() {
@@ -25,11 +29,10 @@ public class UIHelper {
 	
 	public IUserInterface initStates() throws SQLException{
 		Map<String, IUserInterface> states = new HashMap<>();
-		ErrorLogger errorLogger= new ErrorLogger();
 		states.put("home", new HomeUI(states, this, errorLogger));
 		states.put("customer", new CustomerUI(states, this, errorLogger, new CustomerDAO()));
-		states.put("film", new FilmUI(states, this, errorLogger));
-		states.put("rental", new RentalUI(states, this, errorLogger));
+		states.put("film", new FilmUI(states, this, errorLogger, new FilmDAO()));
+		states.put("rental", new RentalUI(states, this, errorLogger, new RentalDAO()));
 		
 		return states.get("home");
 	}
