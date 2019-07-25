@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.m3.training.rentals.Rental;
@@ -15,6 +16,12 @@ public class RentalDAO extends DAO<Rental> {
 
 	private EntityManagerFactory factory;
 	private EntityManager em;
+	private String queryString = "SELECT FILM.Title, RENTALCOUNT, FILM.RENTAL_RATE,	 RENTALCOUNT*FILM.RENTAL_RATE AS TOTALREVENUE "
+			+ "FROM FILM INNER JOIN (SELECT COUNT(INVENTORY.INVENTORY_ID) as RENTALCOUNT, FILM_ID as FILMIDS " 
+			+ "FROM INVENTORY INNER JOIN RENTAL ON RENTAL.INVENTORY_ID = INVENTORY.INVENTORY_ID "
+			+ "GROUP BY FILM_ID ORDER BY FILM_ID)"
+			+ " ON FILM.FILM_ID = FILMIDS ORDER BY RENTALCOUNT DESC";
+
 
 	public RentalDAO() throws SQLException {
 		factory = Persistence.createEntityManagerFactory("rentalsJPA");
@@ -34,4 +41,19 @@ public class RentalDAO extends DAO<Rental> {
 		List<Rental> rentalsList = query.getResultList();
 		return Optional.ofNullable(rentalsList);
 	}
+	
+	public List<Object[]> getRentalActivity() {
+
+		Query query = em.createNativeQuery(queryString);
+		
+		List<Object[]> totalActivity = query.getResultList();
+		for(Object[] object : totalActivity) {
+			System.out.println(object[0] + " " + object[1] + " " + object[2] + " " + object[3]);
+		}
+		return totalActivity;
+
+
+
+	}
+
 }
