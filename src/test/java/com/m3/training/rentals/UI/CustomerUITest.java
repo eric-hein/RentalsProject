@@ -36,7 +36,7 @@ class CustomerUITest {
 		Map<String, IUserInterface> states = new HashMap<>();
 		ErrorLogger errorLogger= new ErrorLogger();
 		dao = mock(CustomerDAO.class);
-		objectUnderTest = new CustomerUI(states, new UIHelper(), errorLogger, dao);
+		objectUnderTest = new CustomerUI(states, new UIHelper(errorLogger), errorLogger, dao);
 	}
 
 	@AfterEach
@@ -45,16 +45,16 @@ class CustomerUITest {
 
 	@Test
 	void test_CustomerUITest_parseExecuteOnFull() throws SQLException {
-		String query = "-fname bob -lname joe -email johnny";
+		String query = "-fname MARY -lname SMITH -email MARY.SMITH@sakilacustomer.org";
 		objectUnderTest.executeQuery(query);
-		verify(dao).readByPartialInfo("bob", "joe", "johnny");
+		verify(dao).readByPartialInfo("MARY", "SMITH", "MARY.SMITH@sakilacustomer.org");
 	}
 	
 	@Test
 	void test_CustomerUITest_parseExecuteOnPartial() throws SQLException {
-		String query = "-fname bob -lname joe";
+		String query = "-fname MARY -lname SMITH";
 		objectUnderTest.executeQuery(query);
-		verify(dao).readByPartialInfo("bob", "joe", null);
+		verify(dao).readByPartialInfo("MARY", "SMITH", null);
 	}
 	
 	@Test
