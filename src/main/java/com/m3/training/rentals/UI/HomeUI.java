@@ -2,15 +2,19 @@ package com.m3.training.rentals.UI;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.m3.training.rentals.errorlogging.ErrorLogger;
+
 public class HomeUI implements IUserInterface {
 
 	private Map<String, IUserInterface> states;
 	private UIHelper helper;
 	private IUserInterface nextState = this;
+	private ErrorLogger errorLogger;
 	
-	public HomeUI(Map<String, IUserInterface> states, UIHelper helper) {
+	public HomeUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger) {
 		this.states= states;
 		this.helper = helper;
+		this.errorLogger = errorLogger;
 	}
 	
 	@Override

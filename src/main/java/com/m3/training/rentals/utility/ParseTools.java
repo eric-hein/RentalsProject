@@ -1,6 +1,8 @@
 package com.m3.training.rentals.utility;
 
 public class ParseTools {
+	
+	
 	public static String caseEmail(String email) {
 		StringBuilder sb = new StringBuilder();
 		int indexOfAt = email.indexOf('@');
@@ -9,4 +11,5 @@ public class ParseTools {
 		sb.append(email.substring(indexOfAt+1, email.length()).toLowerCase());
 		return sb.toString();
 	}
+	
 }
