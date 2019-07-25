@@ -34,7 +34,7 @@ public class InventoryDAO extends DAO {
 	
 	@Override
 	public Object read(int id) {
-		// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
 		return null;
 	}
 

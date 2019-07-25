@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import com.m3.training.rentals.Customer;
+import com.m3.training.rentals.utility.ParseTools;
 
 public class CustomerDAO extends DAO<Customer> {
 	
@@ -33,7 +34,7 @@ public class CustomerDAO extends DAO<Customer> {
 		
 		String fName = fNameInput;
 		String lName = lNameInput;
-		String email = emailInput;
+		String email = ParseTools.caseEmail(emailInput);
 		
 		if(!isValidExpression(fName)) {
 			fName = WILDCARD_EXP;
@@ -47,9 +48,9 @@ public class CustomerDAO extends DAO<Customer> {
 
 		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.firstName LIKE ?0 AND c.lastName LIKE ?1 AND c.email LIKE ?2", Customer.class);
 		
-		query.setParameter(0, fName);
-		query.setParameter(1, lName);
-		query.setParameter(2, email);
+		query.setParameter(0, fName.toUpperCase());
+		query.setParameter(1, lName.toUpperCase());
+		query.setParameter(2, email.toUpperCase());
 		
 		List<Customer> customerList = query.getResultList();
 		
