@@ -1,9 +1,11 @@
 package com.m3.training.rentals.UI;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.m3.training.rentals.dao.CustomerDAO;
 import com.m3.training.rentals.errorlogging.ErrorLogger;
 
 public class UIHelper {
@@ -21,11 +23,11 @@ public class UIHelper {
 		return input;
 	}
 	
-	public IUserInterface initStates(){
+	public IUserInterface initStates() throws SQLException{
 		Map<String, IUserInterface> states = new HashMap<>();
 		ErrorLogger errorLogger= new ErrorLogger();
 		states.put("home", new HomeUI(states, this, errorLogger));
-		states.put("customer", new CustomerUI(states, this, errorLogger));
+		states.put("customer", new CustomerUI(states, this, errorLogger, new CustomerDAO()));
 		states.put("film", new FilmUI(states, this, errorLogger));
 		states.put("rental", new RentalUI(states, this, errorLogger));
 		
