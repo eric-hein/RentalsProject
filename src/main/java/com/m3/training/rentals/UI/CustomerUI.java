@@ -16,16 +16,13 @@ public class CustomerUI implements IUserInterface {
 	private UIHelper helper;
 	private IUserInterface nextState = this;
 	private ErrorLogger errorLogger;
+	CustomerDAO dao;
 	
-	public CustomerUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger) {
+	public CustomerUI(Map<String, IUserInterface> states, UIHelper helper, ErrorLogger errorLogger, CustomerDAO dao) {
 		this.states= states;
 		this.helper = helper;
 		this.errorLogger = errorLogger;
-		try {
-			CustomerDAO dao = new CustomerDAO();
-		} catch (SQLException e) {
-			errorLogger.error("Failed to construct a DAO", e);
-		}
+		this.dao = dao;
 	}
 	
 	@Override
@@ -33,14 +30,14 @@ public class CustomerUI implements IUserInterface {
 		return nextState;
 	}
 
-	private Optional<List<Customer>> executeQuery(String query){
-		if (query==null) return null;
+	Optional<List<Customer>> executeQuery(String query) throws SQLException{
+		if (query==null || query.equals("")) return null;
 		int index=0;
 		Map<String, String> queryParts = new HashMap<String,String>();
 		queryParts.put("-fname", null);
 		queryParts.put("-lname", null);
 		queryParts.put("-email", null);
-		String[] queryPortions= query.split(" ");
+		String[] queryPortions= query.split("\\s+");
 		if (queryPortions.length==0) return null;
 		if (!(queryParts.containsKey(queryPortions[0]))) {
 			throw new IllegalArgumentException("Does not have a proper flag");
@@ -57,7 +54,11 @@ public class CustomerUI implements IUserInterface {
 			}
 			index++;
 		}
-		return null;
+		queryParts.put(currPart, sb.toString());
+		System.out.println("This is the first name:" + queryParts.get("-fname"));
+		System.out.println("This is the last name:" + queryParts.get("-lname"));
+		System.out.println("This is the email:" + queryParts.get("-email"));
+		return dao.readByPartialInfo(queryParts.get("-fname"), queryParts.get("-lname"), queryParts.get("-email")) ;
 	}
 	
 	@Override
