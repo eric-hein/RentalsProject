@@ -1,6 +1,7 @@
 package com.m3.training.rentals.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,9 @@ import javax.persistence.TypedQuery;
 
 import com.m3.training.rentals.Customer;
 
-public class CustomerDAO extends DAO<Customer> {	
+public class CustomerDAO extends DAO<Customer> {
+	
+	private final String WILDCARD_EXP = "%";
 
 	private EntityManagerFactory factory;
 	private EntityManager em;
@@ -21,41 +24,46 @@ public class CustomerDAO extends DAO<Customer> {
 	}
 
 	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Optional<Customer> read(int id) {
 		Customer customer = em.find(Customer.class, id);
 		return Optional.ofNullable(customer);
 	}
 
-	public Optional<Customer> readByName(String fName, String lName) {
-		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.firstName = ?0 AND c.lastName = ?1", Customer.class);
+	public Optional<List<Customer>> readByPartialInfo(String fNameInput, String lNameInput, String emailInput) {
+		
+		String fName = fNameInput;
+		String lName = lNameInput;
+		String email = emailInput;
+		
+		if(!isValidExpression(fName)) {
+			fName = WILDCARD_EXP;
+		}
+		if(!isValidExpression(lName)) {
+			lName = WILDCARD_EXP;
+		}
+		if(!isValidExpression(email)) {
+			email = WILDCARD_EXP;
+		}		
+
+		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.firstName LIKE ?0 AND c.lastName LIKE ?1 AND c.email LIKE ?2", Customer.class);
+		
 		query.setParameter(0, fName);
 		query.setParameter(1, lName);
-		Customer customer = query.getSingleResult();
-		return Optional.ofNullable(customer);
+		query.setParameter(2, email);
+		
+		List<Customer> customerList = query.getResultList();
+		
+		return Optional.ofNullable(customerList);
 	}
-
-	public Optional<Customer> readByEmail(String email) {
-		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.email = ?0", Customer.class);
-		query.setParameter(0, email);
-		Customer customer = query.getSingleResult();
-		return Optional.ofNullable(customer);
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
+	
+	private boolean isValidExpression(String str) {
+		if(str == null) {
+			return false;
+		}
+		else if(str.equals("")) {
+			return false;
+		}
+		return true;
 	}
 }
+
