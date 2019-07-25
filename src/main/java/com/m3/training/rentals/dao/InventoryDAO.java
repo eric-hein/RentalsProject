@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
@@ -26,13 +27,13 @@ public class InventoryDAO extends DAO {
 		em = factory.createEntityManager();
 	}
 
-	public List<Inventory> read() {
+	public Optional<List<Inventory>> read() {
 		TypedQuery<Inventory> query = em.createQuery("SELECT i FROM Inventory i", Inventory.class);
 		List<Inventory> inventoryList = query.getResultList();
-		return inventoryList;
+		return Optional.ofNullable(inventoryList);
 	}
 	
-	@Override
+	@Override 	
 	public Object read(int id) {
 			// TODO Auto-generated method stub
 		return null;
