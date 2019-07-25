@@ -29,5 +29,4 @@ public class StaffDAO extends DAO<Staff> {
 		List<Rental> rentalsList = query.getResultList();
 		return Optional.ofNullable(rentalsList);
 	}
-
 }
