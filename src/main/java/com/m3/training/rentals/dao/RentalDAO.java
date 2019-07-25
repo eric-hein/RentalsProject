@@ -47,9 +47,6 @@ public class RentalDAO extends DAO<Rental> {
 		Query query = em.createNativeQuery(queryString);
 		
 		List<Object[]> totalActivity = query.getResultList();
-		for(Object[] object : totalActivity) {
-			System.out.println(object[0] + " " + object[1] + " " + object[2] + " " + object[3]);
-		}
 		return totalActivity;
 
 

@@ -95,7 +95,7 @@ public class Rental {
 	}
 	public List<Payment> getPaymentList() {
 		return paymentList;
-	}
+	}	
 
 	public String toString() {
 		return "ID: " + rentalID + ",\n" + "Return Date: " + returnDate + 
