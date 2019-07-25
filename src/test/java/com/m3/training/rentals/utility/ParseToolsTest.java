@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class ParseToolsTest {
 
@@ -27,8 +28,12 @@ class ParseToolsTest {
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_ParseToolsTest_parseEmail() {
+		String input= "AsDf.fff@fDsA.COm";
+		String expected = "ASDF.FFF@fdsa.com";
+		String result=ParseTools.caseEmail(input);
+		String msg = "Should have returned : " + expected;
+		assertEquals(expected, result, msg);
 	}
 
 }
