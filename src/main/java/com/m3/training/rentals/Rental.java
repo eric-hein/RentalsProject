@@ -44,6 +44,23 @@ public class Rental {
 	@OneToMany
 	private List<Payment> paymentList = new ArrayList<>();
 
+	
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+	public void setPaymentList(List<Payment> paymentList) {
+		this.paymentList = paymentList;
+	}
 	public int getRentalID() {
 		return rentalID;
 	}
