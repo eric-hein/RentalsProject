@@ -28,8 +28,6 @@ public class Film {
 	private int releaseYear;
 	@Column(name = "LANGUAGE_ID")
 	private int languageID;
-	
-	// FIXME: Change originalLanguageID to optional
 	@Column(name = "ORIGINAL_LANGUAGE_ID")
 	private Integer originalLanguageID;
 	@Column(name = "RENTAL_DURATION")
