@@ -1,23 +1,30 @@
 package com.m3.training.rentals;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.m3.training.rentals.dao.CustomerDAO;
+import com.m3.training.rentals.dao.FilmDAO;
+import com.m3.training.rentals.dao.InventoryDAO;
+import com.m3.training.rentals.dao.RentalDAO;
 
 public class Driver {
 
-	private static EntityManagerFactory factory;
-	
+
 	public static void main (String[] args) {
-		
+
 		System.out.println("what it do baybeee");
-		factory = Persistence.createEntityManagerFactory("rentalsJPA");
-		EntityManager em = factory.createEntityManager();
-		
-		em.getTransaction().begin();
-		City city = em.find(City.class, 3);
-		System.out.println(city);
-		Country country = em.find(Country.class, 3);
-		System.out.println(country.listOfCities());
+		try {
+			CustomerDAO customerDAO = new CustomerDAO();
+			RentalDAO rentalDAO = new RentalDAO();
+			InventoryDAO inventoryDAO = new InventoryDAO();
+			FilmDAO filmDAO = new FilmDAO();
+			System.out.println(filmDAO.readByPartialInfo("BEETHOVEN", ""));
+		} catch (SQLException e) {
+			String msg = "Could not instantiate DAO Objects!";
+			System.err.println(msg + " " + e.getMessage());
+		}
+
 	}
 }

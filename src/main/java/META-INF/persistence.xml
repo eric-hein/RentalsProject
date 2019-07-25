@@ -16,6 +16,8 @@
 				value="johnson" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="show_sql"
+				value = "true" />
 		</properties>
 
 	</persistence-unit>
