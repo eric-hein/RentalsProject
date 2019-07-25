@@ -11,5 +11,4 @@ public class ParseTools {
 		sb.append(email.substring(indexOfAt+1, email.length()).toLowerCase());
 		return sb.toString();
 	}
-	
 }
