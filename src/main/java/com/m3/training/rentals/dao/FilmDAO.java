@@ -41,9 +41,7 @@ public class FilmDAO extends DAO<Film> {
 		else {
 			desc = WILDCARD_EXP + desc + WILDCARD_EXP;
 		}
-
-
-
+		
 		TypedQuery<Film> query = em.createQuery("SELECT f FROM Film f WHERE f.title LIKE ?0 AND f.description LIKE ?1", Film.class);
 		
 		query.setParameter(0, title);

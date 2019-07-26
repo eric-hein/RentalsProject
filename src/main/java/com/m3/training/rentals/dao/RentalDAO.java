@@ -48,9 +48,6 @@ public class RentalDAO extends DAO<Rental> {
 		
 		List<Object[]> totalActivity = query.getResultList();
 		return totalActivity;
-
-
-
 	}
 
 }

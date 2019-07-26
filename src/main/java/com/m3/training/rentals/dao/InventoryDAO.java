@@ -28,6 +28,7 @@ public class InventoryDAO extends DAO {
 	}
 
 	public Optional<List<Inventory>> read() {
+		
 		TypedQuery<Inventory> query = em.createQuery("SELECT i FROM Inventory i", Inventory.class);
 		List<Inventory> inventoryList = query.getResultList();
 		return Optional.ofNullable(inventoryList);

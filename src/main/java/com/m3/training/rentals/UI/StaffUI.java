@@ -25,6 +25,13 @@ public class StaffUI implements IUserInterface {
 		return nextState;
 	}
 
+	private void printResultGrossing(List<Object[]> result2) {
+		
+		for(Object[] object : result2) {
+			System.out.println(object[0] + " " + object[1] + " " + object[2] + " " + object[3]);
+		}
+	}
+
 	
 	private void printResult (Optional<List<Staff>> result) {
 		List<Staff> resultList = result.get();
@@ -37,8 +44,9 @@ public class StaffUI implements IUserInterface {
 	@Override
 	public void execute() throws IllegalStateException {
 		System.out.println("This is the staff database!");
-		System.out.println("Please input \"Get Staff\" to get staff");
+		System.out.println("Please input \"Get Staff\" to get staff or \"revenue\" to see highest grossing staff");
 		String input = helper.readInput();
+		
 		switch(input) {
 			case "home":
 				this.changeNextState("home");
@@ -50,6 +58,10 @@ public class StaffUI implements IUserInterface {
 				Optional<List<Staff>> result = dao.getStaff();
 				printResult(result);
 				break;
+			case "revenue":
+				List<Object[]> result2 = dao.getHighestGrossingStaff();
+				printResultGrossing(result2);
+				break;
 			case "exit":
 				this.setNextState(null);
 				break;
@@ -58,7 +70,7 @@ public class StaffUI implements IUserInterface {
 				System.out.println("That was not a valid option. Please try again.");
 		}
 	}
-	
+
 	private void changeNextState(String nextStateChoice) {
 		if (states.containsKey(nextStateChoice)) {
 			this.setNextState(states.get(nextStateChoice));
