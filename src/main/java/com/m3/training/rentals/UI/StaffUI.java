@@ -28,7 +28,7 @@ public class StaffUI implements IUserInterface {
 	private void printResultGrossing(List<Object[]> result2) {
 		
 		for(Object[] object : result2) {
-			System.out.println(object[0] + " " + object[1] + " " + object[2] + " " + object[3]);
+			System.out.println("Staff ID: " + object[0] + " Name: " + object[1] + " " + object[2] + " Revenue: " + object[3]);
 		}
 	}
 

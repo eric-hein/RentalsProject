@@ -36,7 +36,7 @@ class CustomerUITest {
 		Map<String, IUserInterface> states = new HashMap<>();
 		ErrorLogger errorLogger= new ErrorLogger();
 		dao = mock(CustomerDAO.class);
-		objectUnderTest = new CustomerUI(states, new UIHelper(errorLogger), errorLogger, dao);
+		objectUnderTest = new CustomerUI(states, new UIHelper(errorLogger), dao);
 	}
 
 	@AfterEach
